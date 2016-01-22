@@ -52,7 +52,6 @@
 
             Config::set('app.module.dir',           __DIR__);
             Config::set('mvc.dir',                  __DIR__);
-            Config::set('check.session',            false);
             Config::set('app.module.dirstorage',    $this->dir . DS . 'storage');
             Config::set('app.module.assets',        $this->dir . DS . 'assets');
             Config::set('app.module.config',        $this->dir . DS . 'config');
