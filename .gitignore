@@ -17,7 +17,6 @@ build/
 /*.env
 *.tgz
 *.phar
-*.json
 *.env
 composer.lock
 vendor/
