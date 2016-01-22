@@ -26,10 +26,11 @@
 
             $routes         = isAke($routes, $this->method, []);
 
-            $route          = isAke($routes, $this->page, null);
+            $this->handling($routes);
 
-            if (is_callable($route)) {
-                $args = $route();
+            if (is_callable($this->route)) {
+                $cb     = $this->route;
+                $args   = call_user_func_array($cb, $this->params);
 
                 if (!is_array($args)) {
                     $args = ['main', $args, true];
@@ -49,6 +50,50 @@
             }
 
             $this->boot();
+        }
+
+        public function getUri()
+        {
+            $before = str_replace('/index.php', '', isAke($_SERVER, 'SCRIPT_NAME', ''));
+            $uri    = substr($_SERVER['REQUEST_URI'], strlen($before));
+
+            if (strstr($uri, '?')) {
+                $uri = substr($uri, 0, strpos($uri, '?'));
+            }
+
+            $uri = '/' . trim($uri, '/');
+
+            return $uri;
+        }
+
+        public function handling($routes, $quit = true)
+        {
+            $this->route = null;
+
+            $uri = $this->getUri();
+
+            foreach ($routes as $pattern => $cb) {
+                if ($pattern != '/') {
+                    $pattern = '/' . $pattern;
+                }
+
+                if (preg_match_all('#^' . $pattern . '$#', $uri, $matches, PREG_OFFSET_CAPTURE)) {
+                    $matches = array_slice($matches, 1);
+
+                    $params = array_map(function ($match, $index) use ($matches) {
+                        if (isset($matches[$index + 1]) && isset($matches[$index + 1][0]) && is_array($matches[$index + 1][0])) {
+                            return trim(substr($match[0][0], 0, $matches[$index + 1][0][1] - $match[0][1]), '/');
+                        } else {
+                            return isset($match[0][0]) ? trim($match[0][0], '/') : null;
+                        }
+                    }, $matches, array_keys($matches));
+
+                    $this->route = $cb;
+                    $this->params = $params;
+
+                    return true;
+                }
+            }
         }
 
         private function boot($first = true)

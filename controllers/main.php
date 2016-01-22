@@ -18,4 +18,9 @@
         {
             $this->title = 'Accueil';
         }
+
+        public function getTest()
+        {
+            $this->title = 'Test';
+        }
     }

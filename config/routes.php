@@ -14,8 +14,11 @@
 
     return [
         'GET' => [
-            'home' => function () {
+            '/' => function () {
                 return 'home';
+            },
+            'test' => function () {
+                return 'test';
             }
         ],
         'POST' => [],

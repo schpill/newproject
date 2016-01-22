@@ -33,6 +33,7 @@
             register_shutdown_function([&$this, 'finish']);
 
             Timer::start();
+            // dd("ici");
 
             lib('app');
 
