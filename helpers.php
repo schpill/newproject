@@ -16,7 +16,7 @@
     {
         switch ($adapter) {
             case 'session': return lib('session', [$name]);
-            case 'redis': return RedisSession::instance($name, $ttl);
+            case 'redis':   return RedisSession::instance($name, $ttl);
         }
     }
 

@@ -28,18 +28,17 @@
 
     class Bootstrap
     {
-        public function __construct()
+        public static function init($cli)
         {
-            register_shutdown_function([&$this, 'finish']);
+            register_shutdown_function(['\\Thin\Bootstrap', 'finish']);
 
             Timer::start();
-            // dd("ici");
 
             lib('app');
 
             forever();
 
-            $this->storage_dir = STORAGE_PATH;
+            $storage_dir = STORAGE_PATH;
 
             if (!is_writable(STORAGE_PATH)) {
                 die('Please give 0777 right to ' . STORAGE_PATH);
@@ -49,24 +48,24 @@
                 File::mkdir(CACHE_PATH);
             }
 
-            $this->dir = __DIR__;
+            $dir = __DIR__;
 
             Config::set('app.module.dir',           __DIR__);
             Config::set('mvc.dir',                  __DIR__);
-            Config::set('app.module.dirstorage',    $this->dir . DS . 'storage');
-            Config::set('app.module.assets',        $this->dir . DS . 'assets');
-            Config::set('app.module.config',        $this->dir . DS . 'config');
-            Config::set('dir.raw.store',            $this->storage_dir . DS . 'db');
-            Config::set('dir.ardb.store',           $this->storage_dir . DS . 'db');
-            Config::set('dir.ephemere',             $this->storage_dir . DS . 'ephemere');
-            Config::set('dir.flight.store',         $this->storage_dir . DS . 'flight');
-            Config::set('dir.flat.store',           $this->storage_dir . DS . 'flat');
-            Config::set('dir.cache.store',          $this->storage_dir . DS . 'cache');
-            Config::set('dir.nosql.store',          $this->storage_dir . DS . 'nosql');
-            Config::set('dir.module.logs',          $this->storage_dir . DS . 'logs');
+            Config::set('app.module.dirstorage',    $dir . DS . 'storage');
+            Config::set('app.module.assets',        $dir . DS . 'assets');
+            Config::set('app.module.config',        $dir . DS . 'config');
+            Config::set('dir.raw.store',            $storage_dir . DS . 'db');
+            Config::set('dir.ardb.store',           $storage_dir . DS . 'db');
+            Config::set('dir.ephemere',             $storage_dir . DS . 'ephemere');
+            Config::set('dir.flight.store',         $storage_dir . DS . 'flight');
+            Config::set('dir.flat.store',           $storage_dir . DS . 'flat');
+            Config::set('dir.cache.store',          $storage_dir . DS . 'cache');
+            Config::set('dir.nosql.store',          $storage_dir . DS . 'nosql');
+            Config::set('dir.module.logs',          $storage_dir . DS . 'logs');
 
-            path('module',  $this->dir);
-            path('store',   $this->storage_dir);
+            path('module',  $dir);
+            path('store',   $storage_dir);
             path('config',  Config::get('app.module.config'));
             path('cache',   CACHE_PATH);
 
@@ -80,32 +79,33 @@
 
             require_once path('config') . DS . 'application.php';
 
-            $this->router();
+            if (!$cli) {
+                if (fnmatch('*/mytests', $_SERVER['REQUEST_URI'])) {
+                    self::tests();
+                } else {
+                    self::router();
+                }
+            }
         }
 
-        public function __set($k, $v)
+        private static function tests()
         {
-            $this->$k = $v;
+            $books = Db::Book();
+            $authors = Db::Author();
 
-            return $this;
+            $cb = $authors->firstOrCreate([
+                'firstname' => 'Charles',
+                'name'      => 'Baudelaire',
+                'century'   => '19',
+            ]);
+
+            $book = $books->firstOrCreate(['name' => 'Fleurs du Mal', 'year' => 1865, 'author_id' => $cb->id]);
+            $book2 = $books->firstOrCreate(['name' => 'livre 2', 'year' => 1891, 'author_id' => $cb->id]);
+
+            wdd($cb->books());
         }
 
-        public function __get($k)
-        {
-            return isset($this->$k) ? $this->$k : null;
-        }
-
-        public function __isset($k)
-        {
-            return isset($this->$k);
-        }
-
-        public function __unset($k)
-        {
-            unset($this->$k);
-        }
-
-        public function assetAged($asset)
+        public static function assetAged($asset)
         {
             $file = __DIR__ . $asset;
 
@@ -116,15 +116,15 @@
             return 1;
         }
 
-        public function router()
+        public static function router()
         {
             libProject('router');
         }
 
-        public function finish()
+        public static function finish()
         {
             $time = Timer::get();
         }
     }
 
-    new Bootstrap;
+    Bootstrap::init(isset($cli));
