@@ -1,12 +1,12 @@
 {
-    "name": "thin/wp",
-    "description": "Thin wp",
-    "keywords": ["thin", "framework", "wordpress"],
+    "name": "thin/website",
+    "description": "Thin website",
+    "keywords": ["thin", "framework", "website"],
     "version": "dev",
     "authors": [
         {
             "name": "Gerald Plusquellec",
-            "email": "gplusquellec@gmail.com"
+            "email": "gplusquellec@octali.us"
         }
     ],
     "repositories": [

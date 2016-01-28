@@ -18,5 +18,7 @@ build/
 *.tgz
 *.phar
 *.env
+config/application.php
+/*config/application.php
 composer.lock
 vendor/
