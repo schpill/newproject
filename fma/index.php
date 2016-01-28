@@ -12,19 +12,19 @@
 
     namespace Thin;
 
-    defined('SITE_NAME')        || define('SITE_NAME', getenv('SITE_NAME')              ? getenv('SITE_NAME')       : 'site');
+    define('SITE_NAME', 'fma');
     defined('APPLICATION_ENV')  || define('APPLICATION_ENV', getenv('APPLICATION_ENV')  ? getenv('APPLICATION_ENV') : 'development');
 
     define('STORAGE_PATH', session_save_path());
     define('APPLICATION_PATH', realpath(__DIR__));
     define('CLI', false);
-    define('VENDORS_PATH', realpath(__DIR__ . '/vendor'));
-    define('VENDOR_PATH', realpath(__DIR__ . '/vendor'));
+    define('VENDORS_PATH', realpath(__DIR__ . '/../vendor'));
+    define('VENDOR_PATH', realpath(__DIR__ . '/../vendor'));
     define('CACHE_PATH', session_save_path() . '/cache');
 
     require_once VENDOR_PATH    . '/autoload.php';
     require_once VENDOR_PATH    . '/schpill/standalone/init.php';
-    require_once __DIR__        . '/helpers.php';
+    require_once __DIR__        . '/../helpers.php';
 
     class Bootstrap
     {
@@ -54,7 +54,7 @@
 
             Config::set('app.module.dir',           __DIR__);
             Config::set('mvc.dir',                  __DIR__);
-            Config::set('app.module.dirstorage',    $dir . DS . 'storage');
+            Config::set('app.module.dirstorage',    $storage_dir);
             Config::set('app.module.assets',        $dir . DS . 'assets');
             Config::set('app.module.config',        $dir . DS . 'config');
             Config::set('dir.raw.store',            $storage_dir . DS . 'db');
@@ -85,15 +85,15 @@
                 if (fnmatch('*/mytests', $_SERVER['REQUEST_URI'])) {
                     self::tests();
                 } else {
-                    self::router();
+                    libProject('router');
                 }
             }
         }
 
         private static function tests()
         {
-            $books = Db::Book();
-            $authors = Db::Author();
+            $books      = Db::Book();
+            $authors    = Db::Author();
 
             $cb = $authors->firstOrCreate([
                 'firstname' => 'Charles',
@@ -101,8 +101,8 @@
                 'century'   => '19',
             ]);
 
-            $book = $books->firstOrCreate(['name' => 'Fleurs du Mal', 'year' => 1865, 'author_id' => $cb->id]);
-            $book2 = $books->firstOrCreate(['name' => 'livre 2', 'year' => 1891, 'author_id' => $cb->id]);
+            $book   = $books->firstOrCreate(['name' => 'Fleurs du Mal', 'year' => 1865, 'author_id' => $cb->id]);
+            $book2  = $books->firstOrCreate(['name' => 'livre 2',       'year' => 1891, 'author_id' => $cb->id]);
 
             wdd($cb->books());
         }
@@ -116,11 +116,6 @@
             }
 
             return 1;
-        }
-
-        public static function router()
-        {
-            libProject('router');
         }
 
         public static function finish()
