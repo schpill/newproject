@@ -81,6 +81,8 @@
 
             require_once path('config') . DS . 'application.php';
 
+            core('handler');
+
             if (!$cli) {
                 if (fnmatch('*/mytests', $_SERVER['REQUEST_URI'])) {
                     self::tests();
