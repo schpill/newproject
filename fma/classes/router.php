@@ -18,7 +18,6 @@
 
         public function __construct()
         {
-            $this->page     = isAke($_REQUEST, 'page', 'home');
             $this->request  = core('request');
             $this->method   = $this->request->method();
 

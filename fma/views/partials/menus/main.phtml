@@ -1,0 +1,18 @@
+<div class="navbar-fixed">
+    <nav role="navigation">
+        <div class="nav-wrapper">
+            <a href="<?php echo $this->url("/"); ?>" class="brand-logo">
+                <span>MULTI<sup>DB</sup></span>
+            </a>
+            <?php if ($this->auth): ?>
+                <a href="#" data-activates="mobile-menu" class="button-collapse">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul class="lnav right hide-on-med-and-down">
+                    <?php $this->partial('menus/content.phtml'); ?>
+                </ul>
+                <?php $this->partial('menus/small.phtml'); ?>
+            <?php endif; ?>
+        </div>
+    </nav>
+</div>

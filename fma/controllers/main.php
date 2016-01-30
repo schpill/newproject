@@ -14,9 +14,24 @@
 
     class MainController extends ControllerProject
     {
+
+        public function boot()
+        {
+            $this->auth = session('web')->getUser() !== null;
+
+            if (!$this->auth && $this->action != 'login') {
+                $this->forward('login');
+            }
+        }
+
         public function getHome()
         {
             $this->title = 'Accueil';
+        }
+
+        public function getLogin()
+        {
+            $this->title = 'Connexion';
         }
 
         public function getTest()

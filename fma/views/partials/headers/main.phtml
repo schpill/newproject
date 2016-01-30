@@ -1,8 +1,17 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <title><?php echo $this->title; ?></title>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="<?php echo $this->url('/assets/css/style.css'); ?>" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+        <title><?php echo $this->title; ?></title>
+
+        <link href="http://fonts.googleapis.com/css?family=Material+Icons|Oswald:400,300,700|Questrial:400,300,700,900,600&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+        <link href="<?php echo $this->url("/assets/css/style.css"); ?>" rel="stylesheet">
+        <link href="<?php echo $this->url("/assets/css/app.css"); ?>" rel="stylesheet">
     </head>
     <body>
+    <?php $this->partial('menus/main.phtml'); ?>

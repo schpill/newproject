@@ -14,8 +14,26 @@
 
     class ControllerProject
     {
+        public $title = '';
+
         public function url($url)
         {
             return core('request')->setUrl($url);
+        }
+
+        public function redirect($url)
+        {
+            $url = $this->url('/' . $url);
+            header("Location: $url");
+        }
+
+        public function forward($url)
+        {
+            $url = $this->url('/' . $url);
+            $_SERVER['REQUEST_URI'] = $url;
+
+            new RouterProject();
+
+            exit;
         }
     }

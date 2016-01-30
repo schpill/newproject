@@ -1,0 +1,239 @@
+body {
+    background: #141414;
+    color: #F8F8F8;
+    font-family: Questrial, Arial, "sans serif";
+    font-size: 14px;
+}
+
+a {
+    color: #8F9D6A;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #8F9D6A;
+    text-decoration: underline;
+}
+
+.marroon {
+    color: #9B703F;
+}
+
+.yellow {
+    color: #F9EE98;
+}
+
+.orange {
+    color: #CF6A4C;
+}
+
+.whitey {
+    color: #F8F8F8;
+}
+
+.grey {
+    color: #8A9A95;
+}
+
+.blacky {
+    color: #141414;
+}
+
+.ocre {
+    color:#C5AF75;
+}
+
+.pink {
+    color: #DF0174;
+}
+
+.purple {
+    color: #9B859D;
+}
+
+.green {
+    color: #8F9D6A;
+}
+
+.blue {
+    color:#AFC4DB
+}
+
+.bgmarroon {
+    color: #9B703F;
+}
+
+.bgyellow {
+    color: #F9EE98;
+}
+
+.bgorange {
+    color: #CF6A4C;
+}
+
+.bgwhite {
+    color: #F8F8F8;
+}
+
+.bggrey {
+    color: #8A9A95;
+}
+
+.bgblack {
+    color: #141414;
+}
+
+.bgocre {
+    color:#C5AF75;
+}
+
+.bgpink {
+    color: #DF0174;
+}
+
+.bgpurple {
+    color: #9B859D;
+}
+
+.bggreen {
+    color: #8F9D6A;
+}
+
+.bgblue {
+    color:#AFC4DB
+}
+
+.shadowocre {
+    box-shadow: 1px 1px 10px #222;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Oswald, Arial, "sans serif";
+    color:#C5AF75;
+}
+
+nav {
+    background:#222;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+nav .lnav li:hover {
+    border-bottom: solid 2px #C5AF75;
+    background:#141414;
+}
+
+nav .lnav li:hover a {
+    color: #C5AF75;
+}
+
+.side-nav {
+    background:#222;
+}
+
+.side-nav li a {
+    color: #F8F8F8;
+}
+
+.side-nav li:hover, .side-nav li.active {
+    background-color: #C5AF75;
+}
+
+.side-nav li:hover a, .side-nav li.active a {
+    color:#141414;
+}
+
+nav a:hover {
+    text-decoration: none;
+}
+
+.brand-logo span {
+    font-family: Oswald, Arial, "sans serif";
+    color: #C5AF75;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 36px;
+    font-weight:300;
+}
+
+.panel {
+    background:#222;
+}
+
+.panel .body {
+    padding: 1em;
+}
+
+.panel .header {
+    text-align: center;
+}
+
+.panel .header .title {
+    text-transform: uppercase;
+    text-shadow: 0 1px 1px rgba(2, 2, 2, 0.75);
+    font-size: 1.5em;
+}
+
+.panel .header, .panel .footer {
+    background-image: linear-gradient(to bottom, #C5AF75 0px, #947C3C 100%);
+    background-repeat: repeat-x;
+    padding: 1em;
+    font-family: Oswald, Arial, "sans serif";
+}
+
+.panel .footer {
+    background-image: linear-gradient(to bottom, #947C3C 0px, #C5AF75 100%);
+}
+
+.input-field .prefix.active {
+    color: #C5AF75;
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #C5AF75;
+    box-shadow: 0 1px 0 0 #C5AF75;
+}
+
+input:not([type]):focus:not([readonly])+label, input[type=text]:focus:not([readonly])+label, input[type=password]:focus:not([readonly])+label, input[type=email]:focus:not([readonly])+label, input[type=url]:focus:not([readonly])+label, input[type=time]:focus:not([readonly])+label, input[type=date]:focus:not([readonly])+label, input[type=datetime-local]:focus:not([readonly])+label, input[type=tel]:focus:not([readonly])+label, input[type=number]:focus:not([readonly])+label, input[type=search]:focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
+    color: #C5AF75;
+}
+
+[type="checkbox"]:checked+label:before {
+    border-right: 2px solid #C5AF75;
+    border-bottom: 2px solid #C5AF75;
+}
+
+@media only screen and (max-width:650px) {
+    .login .width-30 {
+        float: none;
+        display: none;
+    }
+
+    .login .width-40 {
+        float: none;
+        width: 80%;
+        margin: auto;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    .brand-logo span {
+        font-weight:400;
+    }
+}
+
+.brand-logo span sup {
+    color:#f8f8f8;
+}
+
+.brand-logo:hover {
+    border-bottom: solid 2px #C5AF75;
+}
+
+.brand-logo:hover span {
+    background: initial;
+}
+
+.button-collapse:hover {
+    color:#C5AF75;
+}
